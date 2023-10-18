@@ -2,10 +2,22 @@
 //VIEW : Represents the user interface
 //CONTROLLER : Handles the user request and acts as a interface between Model and View
 //1-Request 2-Get Data 3-Get Presentation 4-Response
+using BulkyBookWeb.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Runtime.Intrinsics.X86;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+// next, to tell the application to use ApplicationDbContext 
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
+    //and it has to use a
+    //sql Server using connection String we set in appsettings.json
+    builder.Configuration.GetConnectionString("DefaultConnection")
+    )) ;
 
 var app = builder.Build();
 
